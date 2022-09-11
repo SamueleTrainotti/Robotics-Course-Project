@@ -83,9 +83,10 @@ qtcreator-*
 
 # Catkin custom files
 CATKIN_IGNORE
+.catkin_workspace
 
 ### VisualStudioCode ###
-.vscode/*
+**/.vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
