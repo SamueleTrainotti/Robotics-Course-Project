@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="default">
+    <!-- A gazebo links attacher -->
+    <plugin name="ros_link_attacher_plugin" filename="libgazebo_ros_link_attacher.so"/>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <!-- A ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <!-- Bricks -->
+    <include>
+      <uri>model://X1-Y3-Z2</uri>
+      <name>X1-Y3-Z2_0</name>
+      <pose>0.112951 0.374159 0.015572 0.000136 1.567932 1.500134</pose>
+    </include>
+    <include>
+      <uri>model://X1-Y3-Z2</uri>
+      <name>X1-Y3-Z2_1</name>
+      <pose>-0.199983 0.294407 0.028495 -3.141590 0.000480 2.141571</pose>
+    </include>
+    <include>
+      <uri>model://X1-Y3-Z2-FILLET</uri>
+      <name>X1-Y3-Z2-F_0</name>
+      <pose>0.409204 0.230331 0.028490 0.000002 -0.000004 -1.000000</pose>
+    </include>
+    <!-- End Bricks section -->
+  </world>
+</sdf>

@@ -1,0 +1,63 @@
+#include <ros/ros.h>
+#include <image_transport/image_transport.h>
+#include "std_msgs/String.h"
+
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/imgcodecs/imgcodecs.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <cv_bridge/cv_bridge.h>
+
+#include <sys/stat.h>
+
+using namespace std;
+using namespace cv;
+
+string name;
+int num;
+Mat img;
+
+void imageCallback(const sensor_msgs::ImageConstPtr &msg)
+{
+    try
+    {
+        img = cv_bridge::toCvShare(msg, "bgr8")->image;
+        imshow("view", img);
+        waitKey(50);
+    }
+    catch (cv_bridge::Exception &e)
+    {
+        ROS_ERROR("Could not convert from '%s' to 'bgr8'.", msg->encoding.c_str());
+    }
+}
+
+void clickCB(int event, int x, int y, int flags, void* userdata) {
+    if  ( event == EVENT_LBUTTONDOWN )
+    {
+        // writing the image to a defined location as JPEG
+        string path = "./" + name + "/" + to_string(num++) + ".jpg";
+        bool check = imwrite(path, img);
+        cout << "saved: " << path << endl;
+    }
+}
+
+int main(int argc, char **argv)
+{
+    ros::init(argc, argv, "stream_images_node");
+
+    cout << "Folder name: ";
+    cin >> name; 
+    cout << endl;
+    num = 0;
+
+    mkdir(name.c_str(), 0777);
+
+    ros::NodeHandle nh;
+    namedWindow("view");
+    setMouseCallback("view", clickCB, NULL);
+
+
+    image_transport::ImageTransport it(nh);
+    image_transport::Subscriber subColor = it.subscribe("/camera/Scene/image_raw", 1, imageCallback);
+    ros::spin();
+    destroyWindow("view");
+}

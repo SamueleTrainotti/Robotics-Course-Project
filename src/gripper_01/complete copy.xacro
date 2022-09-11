@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="assembled_robot">
+
+	<!-- THE ROBOT -->
+	<link name="world" />
+
+	<!-- UR5 model -->
+	<xacro:include filename="$(find ur5-joint-position-control)/urdf/ur5_jnt_pos_ctrl.xacro" />
+	<joint name="world_joint" type="fixed">
+		<parent link="world" />
+		<child link = "base_link" />
+		<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+	</joint>
+
+	<!-- Robotiq gripper -->
+	<xacro:include filename="$(find robotiq_2f_model)/model/robotiq_2f_85.urdf.xacro" />
+	<xacro:robotiq_2f_85 name="simple_gripper" parent="wrist_3_link" precise_collision="false" >
+		<origin xyz="0 0.0823 0" rpy="-1.5708 -1.5708 0" />
+	</xacro:robotiq_2f_85>
+
+    <!-- Plugin -->
+	<gazebo>
+		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+			<robotNamespace>/simple_gripper</robotNamespace>
+		</plugin>
+	</gazebo>
+</robot>

@@ -1,0 +1,35 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/Samuele/catkin_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/Samuele/catkin_ws/src/eigen_example/include/**",
+        "/home/Samuele/catkin_ws/src/gazebo-pkgs/gazebo_grasp_plugin/include/**",
+        "/home/Samuele/catkin_ws/src/gazebo-pkgs/gazebo_state_plugins/include/**",
+        "/home/Samuele/catkin_ws/src/gazebo-pkgs/gazebo_test_tools/include/**",
+        "/home/Samuele/catkin_ws/src/gazebo-pkgs/gazebo_version_helpers/include/**",
+        "/home/Samuele/catkin_ws/src/gazebo-pkgs/gazebo_world_plugin_loader/include/**",
+        "/home/Samuele/catkin_ws/src/manager/include/**",
+        "/home/Samuele/catkin_ws/src/general-message-pkgs/object_msgs_tools/include/**",
+        "/home/Samuele/catkin_ws/src/roboticsgroup_gazebo_plugins-master/include/**",
+        "/home/Samuele/catkin_ws/src/robotiq-master/robotiq_2f_controllers/include/**",
+        "/home/Samuele/catkin_ws/src/robotiq-master/robotiq_2f_hardware/include/**",
+        "/home/Samuele/catkin_ws/src/robotiq-master/robotiq_2f_hw_usb/include/**",
+        "/home/Samuele/catkin_ws/src/simple_trajectory/include/**",
+        "/home/Samuele/catkin_ws/src/universal_robot/ur_kinematics/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

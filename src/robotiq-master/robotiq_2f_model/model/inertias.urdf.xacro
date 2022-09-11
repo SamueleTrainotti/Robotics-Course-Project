@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+<!-- Constant aplifier for inertia -->
+<xacro:property name="alpha" value="100"/>
+
+<!-- length is along the z-axis! -->
+<xacro:macro name="cylinder_inertia" params="radius length mass">
+	<inertia ixx="${alpha * mass * (3 * radius * radius + length * length) / 12}" iyy="${alpha * mass * (3 * radius * radius + length * length) / 12}" izz="${alpha * mass * radius* radius / 2}" ixy="0" iyz="0" ixz="0"/>
+</xacro:macro>
+
+<xacro:macro name="box_inertia" params="x_dim y_dim z_dim mass">
+	<inertia ixx="${alpha * mass * (y_dim * y_dim + z_dim * z_dim) / 12}" iyy="${alpha * mass * (x_dim * x_dim + z_dim * z_dim) / 12}" izz="${alpha * mass * (x_dim * x_dim + y_dim * y_dim) / 12}" ixy="0" iyz="0" ixz="0"/>
+</xacro:macro>
+
+</robot>

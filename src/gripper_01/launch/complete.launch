@@ -1,0 +1,47 @@
+<launch>  
+    <!-- Important to load path first, otherwise ".woorld" files will not fine bricks-->
+    <env name="GAZEBO_MODEL_PATH" value="~/.gazebo/models:$(find bricks-stl):${GAZEBO_MODEL_PATH}"/>
+    <!-- Launch world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <!--<arg name="world_name" value="$(find gazebo_ros_link_attacher)/worlds/base.world"/>-->
+        <arg name="world_name" value="$(find gripper_01)/worlds/Ass4/w1.world"/>
+        <arg name="paused" value="false"/>
+        <arg name="gui" value="true"/>
+    </include>
+    
+    <!-- Robot -->
+    <param name="robot_description" command="$(find xacro)/xacro $(find gripper_01)/complete.xacro" />  
+    <!-- Load model-->
+    <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model"
+    args="-urdf -param robot_description -model rob -J shoulder_lift_joint -1.5 -J elbow_joint 1.0" respawn="false" />   
+    
+    <!-- Top camera -->
+    <param name="camera_description" command="$(find xacro)/xacro $(find gripper_01)/top_camera.xacro" />  
+    <!-- Load model -->
+    <node name="spawn_camera_model" pkg="gazebo_ros" type="spawn_model"
+    args="-urdf -param camera_description -model top_camera" respawn="false" />
+
+    
+    <!-- Load joint controller configurations from YAML file to parameter server -->
+    <rosparam file="$(find ur5-joint-position-control)/config/ur5_jnt_pos_ctrl.yaml" command="load"/> 
+    <rosparam file="$(find gripper_01)/config/controllers.yaml" command="load"/>
+
+    <!-- Start position node -->
+    <node pkg="simple_trajectory" type="pos_listener" name="kinematics" respawn="true" output="screen"/>
+    <!-- Start manager node -->
+    <node pkg="manager" type="manager_node" name="manager" respawn="true" output="screen"/>
+    <!-- Start gripper node -->
+    <node pkg="gripper_01" type="cmd_listener" name="gripper" respawn="true" output="log"/>
+    <!-- Start camera node -->
+    <node pkg="depth_camera" type="stream_images_node" name="camera" respawn="true" output="log"/>
+    <!-- Start yolo node 
+    <node pkg="detector" type="detector_node" name="yolo" respawn="false" output="screen"/>-->
+
+    <!-- Load all joints controllers -->
+	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"  
+    args="gripper_state_controller gripper_trajectory_controller 
+    shoulder_pan_joint_position_controller shoulder_lift_joint_position_controller 
+    elbow_joint_position_controller wrist_1_joint_position_controller wrist_2_joint_position_controller 
+    wrist_3_joint_position_controller joint_state_controller" />
+    
+</launch>
