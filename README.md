@@ -11,7 +11,7 @@ We used UR5 from [Universal Robot](https://github.com/ros-industrial/universal_r
 
 Details can be found in [Project1.pdf](https://github.com/SamueleTrainotti/Robotics-Course-Project/blob/main/Project1.pdf).
 Our presentation is also available here [Presentation.pdf](https://github.com/SamueleTrainotti/Robotics-Course-Project/blob/main/Presentation.pdf).
-Some videos for each assignment were uploaded to google drive [here](https://drive.google.com/drive/folders/1_1R704PXOPwu2pmjwibdabot2Y0JE40i?usp=sharing).
+Some videos for each assignment were uploaded to google drive. For videos, training images and other files refer to this [shared folder](https://drive.google.com/drive/folders/1gfYYFXrYf67fyxEjsdsrf31MOUgTB5Uj?usp=sharing).
 
 ## Installation
 
